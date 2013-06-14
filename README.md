@@ -12,9 +12,11 @@ Requirements
 Installation
 ------------
 
-1. Download this repository as zip file and extract it
-2. In Admin Panel go to Plugins->Add New->Upload, upload paysera.zip archive and activate it.
-3. In Admin Panel go to WooCommerce->Settings->Payment Gateways and fill in all required data under "Paysera" tab.
+1. Download this repository as zip file and extract "paysera" folder into "tmp" folder of your Joomla.
+2. Go to extensions->extension manager->install;
+3. On "Install from directory" area click "Install" button;
+4. Go to extensions->extension manager->manage and enable "HikaShop Paysera.com payment plugin";
+5. Go to Components->Hikashop->System->Payment methods->HikaShop Paysera.com payment plugin and	write required info. Press "Save and close" button;
 
 Contacts
 --------
