@@ -1,0 +1,16 @@
+# --REIKALAVIMAI --
+
+	Joomla 2.5;
+	HikaShop 1.6;
+
+# -- INSTRUKCIJA --
+
+	1. Nukopijuokite paysera direktorija i Joomla tmp dikretoja;
+	2. Eikite i Ispletimai->ispletimu tvarkykle->idiegti;
+	3. "Idiegti is katalogo" skiltyje paspauskite "Idiegti" mygtuka;
+	4. Eikite i Ispletimai->ispletimu tvarkykle->tvarkyti ir aktyvuokite "HikaShop Paysera.com payment plugin";
+	5. Eikite i Komponentai->Hikashop->Sistema->Payment methods->HikaShop Paysera.com payment plugin ir
+	suveskite reikalinga informacija. Paspauskite 'save and close' mygtuka.
+
+
+2013-03-20 | Fixed order status change with other languages
