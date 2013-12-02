@@ -7,7 +7,7 @@ Requirements
 ------------
 
 - Joomla 2.5
-- HikaShop 1.6
+- HikaShop 2.2
 
 Installation
 ------------
