@@ -3,15 +3,17 @@ defined('_JEXEC') or die('Restricted access');
 
 class plgHikashoppaymentPaysera extends hikashopPaymentPlugin {
 
-    	var $accepted_currencies = array('LTL', 'USD', 'EUR');
-    	var $multiple = true;
+	var $accepted_currencies = array('LTL', 'USD', 'EUR');
+	var $multiple = true;
 	var $name = 'paysera';
 	var $pluginConfig = array(
 		'project_id' => array('Project ID', 'input'),
 		'project_pass' => array('Project password', 'input'),
 		'test_mode' => array('Enable test mode?', 'boolean','0'),
+		'cancel_url' => array('CANCEL_URL', 'input'),
+		'return_url' => array('RETURN_URL', 'input'),
 		'verified_status' => array('VERIFIED_STATUS', 'orderstatus')
-    	);
+	);
 	
 	function getPaymentDefaultValues(&$element) {
 		$element->payment_name                    = 'Paysera';
