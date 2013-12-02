@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension method="upgrade" type="plugin" version="2.6" group="hikashoppayment">
+<extension type="plugin" version="2.5" method="upgrade" group="hikashoppayment">
 	<name>HikaShop Paysera.com payment plugin</name>
 	<creationDate>April 2011</creationDate>
 	<author>EVP International</author>
@@ -12,7 +12,7 @@
 	<files>
 		<filename plugin="paysera">paysera.php</filename>
 		<filename>paysera_end.php</filename>
-		<folder>vendor</folder>
+		<filename>vendor/webtopay/libwebtopay/WebToPay.php</filename>
 	</files>
 	<params addpath="/components/com_hikashop/params">
 		<param name="pluginoptions" type="pluginoptions" default="plugin" label="hikashop" description="HikaShop options" />
@@ -21,7 +21,7 @@
 		<fields name="params" addfieldpath="/components/com_hikashop/fields">
 			<fieldset name="basic">
 				<field id="pluginoptions" name="pluginoptions" type="pluginoptions" label="hikashop" description="HikaShop options" />
-            		</fieldset>
+			</fieldset>
 		</fields>
 	</config>
 </extension>
