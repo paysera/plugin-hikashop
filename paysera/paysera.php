@@ -26,7 +26,7 @@ class plgHikashoppaymentPaysera extends hikashopPaymentPlugin {
 		parent::onAfterOrderConfirm($order, $methods, $method_id);
 
 		$lang = JFactory::getLanguage();
-        
+
 		$amount    = number_format(($order->order_full_price * 100), 0, '', '');
 		if(!empty($order->cart->shipping_address))
 			$address   = $order->cart->shipping_address;
@@ -39,23 +39,23 @@ class plgHikashoppaymentPaysera extends hikashopPaymentPlugin {
 
 		$request = null;
 		require_once('vendor/webtopay/libwebtopay/WebToPay.php');
-        
+
 		try {
 			$request = WebToPay::buildRequest(array(
 				'projectid'     => $this->payment_params->project_id,
 				'sign_password' => $this->payment_params->project_pass,
-				
+
 				'orderid'       => hikashop_encode($order),
 				'amount'        => $amount,
 				'currency'      => $this->currency->currency_code,
 				'lang'          => substr($lang->get('name'), 0, 3),
-				
+
 				'accepturl'     => $acceptURL,
 				'cancelurl'     => $cancelURL,
 				'callbackurl'   => $callbackURL,
 				'payment'       => '',
 				'country'       => 'LT',
-				
+
 				'logo'          => '',
 				'p_firstname'   => @$address->address_firstname,
 				'p_lastname'    => @$address->address_lastname,
@@ -68,13 +68,13 @@ class plgHikashoppaymentPaysera extends hikashopPaymentPlugin {
 		} catch (WebToPayException $e) {
 			echo get_class($e) . ': ' . $e->getMessage();
 		}
-        
+
 		$this->request = $request;
-	
+
 		return $this->showPage('end');
 	}
 
-    	function onPaymentNotification(&$statuses) {
+	function onPaymentNotification(&$statuses) {
 		$method_id = JRequest::getInt('notif_id', 0);
 		$this->pluginParams($method_id);
 		$this->payment_params =& $this->plugin_params;
@@ -85,43 +85,43 @@ class plgHikashoppaymentPaysera extends hikashopPaymentPlugin {
 
 		try {
 			$response = WebToPay::validateAndParseData($_GET, $this->payment_params->project_id, $this->payment_params->project_pass);
-			
+
 			$orderId = isset($response['orderid']) ? $response['orderid'] : null;
-			
+
 			if (empty($orderId)) {
 				throw new Exception('Order with this ID not found');
 			}
-			
+
 			$order_id = (int)hikashop_decode($orderId);
 			$dbOrder = $this->getOrder($order_id);
 			if(empty($dbOrder) || $method_id != $dbOrder->order_payment_id)
 				return false;
 			$this->loadOrderData($dbOrder);
-			
+
 			if ($dbOrder->order_status == $this->payment_params->verified_status) {
 				exit('ok');
 			}
-			
+
 			if ($response['status'] == 1) {
 				if ($response['amount'] != intval(number_format(($dbOrder->order_full_price * 100), 0, '', ''))) {
 					throw new Exception("Price doesn't match");
 				}
-				
+
 				if ($response['currency'] != $this->currency->currency_code) {
 					throw new Exception("Currency does't match expected: {$currency->currency_code}, got {$response['currency']}");
 				}
-				
+
 				$history = new stdClass();
 				$history->notified = 1;
-				
+
 				$payment_status = 'Accepted';
 				$order_status = $this->payment_params->verified_status;
 				$order_text = '';
-				
+
 				$email = new stdClass();
 				$email->body = str_replace('<br/>',"\r\n",JText::sprintf('PAYMENT_NOTIFICATION_STATUS','Paysera', $payment_status)).' '.JText::sprintf('ORDER_STATUS_CHANGED', $statuses[$order_status])."\r\n\r\n".$order_text;
 				$email->subject = JText::sprintf('PAYMENT_NOTIFICATION_FOR_ORDER', 'Paysera', $payment_status, $dbOrder->order_number);
-				
+
 				$this->modifyOrder($order_id, $order_status, $history, $email);
 			}
 			exit('OK');
