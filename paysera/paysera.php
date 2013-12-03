@@ -27,7 +27,7 @@ class plgHikashoppaymentPaysera extends hikashopPaymentPlugin {
 
 		$lang = JFactory::getLanguage();
 
-		$amount    = number_format(($order->order_full_price * 100), 0, '', '');
+		$amount    = number_format((round($order->order_full_price,2) * 100), 0, '', '');
 		if(!empty($order->cart->shipping_address))
 			$address   = $order->cart->shipping_address;
 		else
@@ -103,7 +103,7 @@ class plgHikashoppaymentPaysera extends hikashopPaymentPlugin {
 			}
 
 			if ($response['status'] == 1) {
-				if ($response['amount'] != intval(number_format(($dbOrder->order_full_price * 100), 0, '', ''))) {
+				if ($response['amount'] != intval(number_format((round($dbOrder->order_full_price,2) * 100), 0, '', ''))) {
 					throw new Exception("Price doesn't match");
 				}
 
