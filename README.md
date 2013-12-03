@@ -1,5 +1,5 @@
-plugin-hikashop
-===============
+paysera-plugin-hikashop
+=======================
 
 Paysera.com payment gateway plugin for Joomla HikaShop
 
@@ -7,7 +7,7 @@ Requirements
 ------------
 
 - Joomla 2.5
-- HikaShop 1.6
+- HikaShop 2.2
 
 Installation
 ------------
@@ -16,7 +16,9 @@ Installation
 2. Go to extensions->extension manager->install.
 3. On "Install from directory" area click "Install" button.
 4. Go to extensions->extension manager->manage and enable "HikaShop Paysera.com payment plugin".
-5. Go to Components->Hikashop->System->Payment methods->HikaShop Paysera.com payment plugin and	write required info. Press "Save and close" button.
+5. Go to "Components > Hikashop > System > Payment methods"
+6. Click on "new" and select the HikaShop Paysera.com payment plugin
+7. Write required info. Press "Save and close" button.
 
 Contacts
 --------

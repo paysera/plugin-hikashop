@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install method="upgrade" type="plugin" version="2.6" group="hikashoppayment">
+<extension type="plugin" version="2.5" method="upgrade" group="hikashoppayment">
 	<name>HikaShop Paysera.com payment plugin</name>
 	<creationDate>April 2011</creationDate>
 	<author>EVP International</author>
 	<authorEmail>info@evp.lt</authorEmail>
 	<authorUrl>http://www.evp.lt</authorUrl>
-	<copyright>Copyright (C) 2010 HIKARI SOFTWARE SARL - All rights reserved.</copyright>
+	<copyright>Copyright (C) 2010-2013 HIKARI SOFTWARE SARL - All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<version>1.0.0</version>
 	<description>This plugin enables you to pay via www.paysera.com</description>
 	<files>
 		<filename plugin="paysera">paysera.php</filename>
 		<filename>paysera_end.php</filename>
-		<filename>paysera_configuration.php</filename>
 		<filename>vendor/webtopay/libwebtopay/WebToPay.php</filename>
 	</files>
 	<params addpath="/components/com_hikashop/params">
+		<param name="pluginoptions" type="pluginoptions" default="plugin" label="hikashop" description="HikaShop options" />
 	</params>
-</install>
+	<config>
+		<fields name="params" addfieldpath="/components/com_hikashop/fields">
+			<fieldset name="basic">
+				<field id="pluginoptions" name="pluginoptions" type="pluginoptions" label="hikashop" description="HikaShop options" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
